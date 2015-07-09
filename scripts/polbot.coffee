@@ -32,7 +32,7 @@ module.exports = (robot) ->
       robot.voting.votes = {}
       createChoices msg.match[1]
 
-      msg.send "POLLS ARE NOW OPEN, ROCK THE VOTE:"
+      msg.send "POLLS ARE NOW OPEN, ROCK THE VOTE :ballot_box_with_check: :\n\t polbot upvote [choice] //casts ballot"
       sendChoices(msg)
 
   robot.respond /end/i, (msg) ->
