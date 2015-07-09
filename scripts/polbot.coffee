@@ -24,10 +24,10 @@ module.exports = (robot) ->
   robot.voting = {}
 
   robot.respond /help/i, (msg) ->
-    msg.send ">pollbot open item1, item2, item3, ...
-              >pollbot upvote (for) n -- where n is choice, for is optional
-              >pollbot choices -- shows current choices
-              >pollbot tally -- shows current votes
+    msg.send ">pollbot open item1, item2, item3, ...\n
+              >pollbot upvote (for) n -- where n is choice, for is optional\n
+              >pollbot choices -- shows current choices\n
+              >pollbot tally -- shows current votes\n
               >pollbot close -- end poll"
 
   robot.respond /open (.+)$/i, (msg) ->
@@ -39,7 +39,7 @@ module.exports = (robot) ->
       robot.voting.votes = {}
       createChoices msg.match[1]
 
-      msg.send "POLLS ARE NOW OPEN, :ballot_box_with_check: ROCK THE VOTE:\t ```polbot upvote [choice]```"
+      msg.send "POLLS ARE NOW OPEN, :ballot_box_with_check: ROCK THE VOTE:\t ```pollbot upvote [choice]```"
       sendChoices(msg)
 
   robot.respond /close/i, (msg) ->
