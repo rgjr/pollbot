@@ -50,7 +50,7 @@ module.exports = (robot) ->
 
       response = "TIME'S UP: "
       for choice, index in robot.voting.choices
-        response += "\n option #{choice}: #{results[index]}"
+        response += "\n #{choice}: #{results[index]}"
 
       msg.send response
 
@@ -94,7 +94,7 @@ module.exports = (robot) ->
     if robot.voting.choices?
       response = ""
       for choice, index in robot.voting.choices
-        response += "option #{index}: #{choice}"
+        response += "#{choice} - #{index}"
         if results?
           response += " -- sitting at: #{results[index]}"
         response += "\n" unless index == robot.voting.choices.length - 1
