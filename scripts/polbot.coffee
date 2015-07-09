@@ -24,11 +24,11 @@ module.exports = (robot) ->
   robot.voting = {}
 
   robot.respond /help/i, (msg) ->
-    msg.send ">pollbot open item1, item2, item3, ...\n
-              >pollbot upvote (for) n -- where n is choice, for is optional\n
-              >pollbot choices -- shows current choices\n
-              >pollbot tally -- shows current votes\n
-              >pollbot close -- end poll"
+    msg.send ">pollbot open item1, item2, ... -- Start a poll with choices\n
+>pollbot upvote (for) n -- where n is choice, for is optional\n
+>pollbot choices -- shows current choices\n
+>pollbot tally -- shows current votes\n
+>pollbot close -- end poll"
 
   robot.respond /open (.+)$/i, (msg) ->
 
