@@ -54,7 +54,7 @@ module.exports = (robot) ->
 
       response = "TIME'S UP: "
       for choice, index in robot.voting.choices
-        response += "\n #{choice}: #{results[index]}"
+        response += "\n *#{choice}*: #{results[index]}"
 
       msg.send response
 
