@@ -86,7 +86,7 @@ module.exports = (robot) ->
 
     if validChoice choice
       robot.voting.votes[sender] = choice
-      msg.send "#{sender} likes #{robot.voting.choices[choice]}"
+      msg.send "#{sender} likes *#{robot.voting.choices[choice]}*"
     else
       msg.send "#{sender}: CHECK THE CHOICES, TRY AGAIN"
 
@@ -98,7 +98,7 @@ module.exports = (robot) ->
     if robot.voting.choices?
       response = ""
       for choice, index in robot.voting.choices
-        response += "#{choice} - #{index}"
+        response += "*#{choice}*"
         if results?
           response += " -- sitting at: #{results[index]}"
         response += "\n" unless index == robot.voting.choices.length - 1
