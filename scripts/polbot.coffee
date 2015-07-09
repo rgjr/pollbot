@@ -1,10 +1,10 @@
 module.exports = (robot) ->
   robot.voting = {}
 
-  robot.respond /polstart vote (.+)$/i, (msg) ->
+  robot.respond /start vote (.+)$/i, (msg) ->
 
     if robot.voting.votes?
-      msg.send "Slow down bro, a vote's already in progress"
+      msg.send "POLLS ARE ALREADY OPEN, TRY AGAIN NEXT ELECTION CYCLE"
       sendChoices (msg)
     else
       robot.voting.votes = {}
@@ -13,7 +13,7 @@ module.exports = (robot) ->
       msg.send "ROCK THE VOTE"
       sendChoices(msg)
 
-  robot.respond /polend vote/i, (msg) ->
+  robot.respond /end vote/i, (msg) ->
     if robot.voting.votes?
       console.log robot.voting.votes
 
