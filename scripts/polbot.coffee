@@ -16,6 +16,10 @@
 #
 # Notes:
 #   None
+# 
+# TODO:
+#   Add timer function
+#   Allow only user who opened the polls to close them
 #
 # Original Author:
 #   antonishen
