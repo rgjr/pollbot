@@ -8,11 +8,11 @@
 #   None
 #
 # Commands:
-#   polbot open item1, item2, item3, ...
-#   polbot upvote for N - where N is the choice number or the choice name
-#   polbot choices
-#   polbot show votes - shows current votes
-#   polbot close
+#   pollbot open item1, item2, item3, ...
+#   pollbot upvote for N - where N is the choice number or the choice name
+#   pollbot choices
+#   pollbot tally - shows current votes
+#   pollbot close
 #
 # Notes:
 #   None
@@ -22,6 +22,13 @@
 
 module.exports = (robot) ->
   robot.voting = {}
+
+  robot.respond /help (msg) ->
+    msg.send ">pollbot open item1, item2, item3, ...
+              >pollbot upvote (for) n -- where n is choice, for is optional
+              >pollbot choices -- shows current choices
+              >pollbot tally -- shows current votes
+              >pollbot close -- end poll"
 
   robot.respond /open (.+)$/i, (msg) ->
 
@@ -35,7 +42,7 @@ module.exports = (robot) ->
       msg.send "POLLS ARE NOW OPEN, :ballot_box_with_check: ROCK THE VOTE:\n\t ```polbot upvote [choice]```"
       sendChoices(msg)
 
-  robot.respond /end/i, (msg) ->
+  robot.respond /close/i, (msg) ->
     if robot.voting.votes?
       console.log robot.voting.votes
 
