@@ -1,19 +1,41 @@
+# Description
+#   Vote on stuff!
+#
+# Dependencies:
+#   None
+#
+# Configuration:
+#   None
+#
+# Commands:
+#   polbot open item1, item2, item3, ...
+#   polbot upvote for N - where N is the choice number or the choice name
+#   polbot choices
+#   polbot show votes - shows current votes
+#   polbot close
+#
+# Notes:
+#   None
+#
+# Original Author:
+#   antonishen
+
 module.exports = (robot) ->
   robot.voting = {}
 
-  robot.respond /start vote (.+)$/i, (msg) ->
+  robot.respond /open (.+)$/i, (msg) ->
 
     if robot.voting.votes?
       msg.send "POLLS ARE ALREADY OPEN, TRY AGAIN NEXT ELECTION CYCLE"
-      sendChoices (msg)
+      sendChoices(msg)
     else
       robot.voting.votes = {}
       createChoices msg.match[1]
 
-      msg.send "ROCK THE VOTE"
+      msg.send "POLLS ARE NOW OPEN, ROCK THE VOTE:"
       sendChoices(msg)
 
-  robot.respond /end vote/i, (msg) ->
+  robot.respond /end/i, (msg) ->
     if robot.voting.votes?
       console.log robot.voting.votes
 
@@ -21,7 +43,7 @@ module.exports = (robot) ->
 
       response = "TIME'S UP: "
       for choice, index in robot.voting.choices
-        response += "\n#{choice}: #{results[index]}"
+        response += "\n option #{choice}: #{results[index]}"
 
       msg.send response
 
@@ -31,10 +53,10 @@ module.exports = (robot) ->
       msg.send "BRUH, POLLS ARE CLOSED"
 
 
-  robot.respond /show choices/i, (msg) ->
+  robot.respond /choices/i, (msg) ->
     sendChoices(msg)
 
-  robot.respond /show votes/i, (msg) ->
+  robot.respond /tally/i, (msg) ->
     results = tallyVotes()
     sendChoices(msg, results)
 
@@ -53,7 +75,7 @@ module.exports = (robot) ->
 
     if validChoice choice
       robot.voting.votes[sender] = choice
-      msg.send "#{sender} UPVOTED #{robot.voting.choices[choice]}"
+      msg.send "#{sender} likes #{robot.voting.choices[choice]}"
     else
       msg.send "#{sender}: CHECK THE CHOICES, TRY AGAIN"
 
@@ -65,9 +87,9 @@ module.exports = (robot) ->
     if robot.voting.choices?
       response = ""
       for choice, index in robot.voting.choices
-        response += "#{index}: #{choice}"
+        response += "\t option #{index+1}: #{choice}"
         if results?
-          response += " -- FINAL TALLY: #{results[index]}"
+          response += " -- sitting at: #{results[index]}"
         response += "\n" unless index == robot.voting.choices.length - 1
     else
       msg.send "NOPE, POLLS CLOSED"
