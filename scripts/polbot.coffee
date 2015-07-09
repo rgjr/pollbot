@@ -39,7 +39,7 @@ module.exports = (robot) ->
       robot.voting.votes = {}
       createChoices msg.match[1]
 
-      msg.send ":ballot_box_with_check: ROCK THE VOTE:\t >pollbot upvote [choice]"
+      msg.send ":ballot_box_with_check: ROCK THE VOTE:\n >pollbot upvote [choice]"
       sendChoices(msg)
 
   robot.respond /close/i, (msg) ->
