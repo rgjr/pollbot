@@ -29,15 +29,16 @@ module.exports = (robot) ->
 
   robot.respond /help/i, (msg) ->
     msg.send "```pollbot open item1, item2, ... -- Start a poll with choices
-pollbot upvote (for) n -- where n is choice, for is optional
-pollbot choices -- shows current choices
-pollbot tally -- shows current votes
-pollbot close -- end poll```"
+    pollbot upvote (for) n -- where n is choice, for is optional
+    pollbot choices -- shows current choices
+    pollbot tally -- shows current votes
+    pollbot close -- end poll
+    ```"
 
   robot.respond /open (.+)$/i, (msg) ->
 
     if robot.voting.votes?
-      msg.send "```POLLS ARE ALREADY OPEN, TRY AGAIN NEXT ELECTION CYCLE```"
+      msg.send "```polls are currently open, try once this election cycle is done```"
       sendChoices(msg)
     else
       robot.voting.votes = {}
@@ -52,7 +53,7 @@ pollbot close -- end poll```"
 
       results = tallyVotes()
 
-      response = "```TIME'S UP: "
+      response = "@here ```TIME'S UP: "
       for choice, index in robot.voting.choices
         response += "#{choice}: #{results[index]}```"
 
@@ -61,7 +62,7 @@ pollbot close -- end poll```"
       delete robot.voting.votes
       delete robot.voting.choices
     else
-      msg.send "```BRUH, POLLS ARE CLOSED```"
+      msg.send "```bruh, polls are closed right now```"
 
 
   robot.respond /choices/i, (msg) ->
@@ -88,7 +89,7 @@ pollbot close -- end poll```"
       robot.voting.votes[sender] = choice
       msg.send "```#{sender} likes #{robot.voting.choices[choice]}```"
     else
-      msg.send "```#{sender}: CHECK THE CHOICES, TRY AGAIN```"
+      msg.send "```#{sender}: check the choices and try again```"
 
   createChoices = (rawChoices) ->
     robot.voting.choices = rawChoices.split(/, /)
@@ -100,10 +101,10 @@ pollbot close -- end poll```"
       for choice, index in robot.voting.choices
         response += "```#{choice} - #{index}"
         if results?
-          response += " -- sitting at: #{results[index]}```"
+          response += " -- currently at: #{results[index]}```"
         response += "\n" unless index == robot.voting.choices.length - 1
     else
-      msg.send "NOPE, POLLS CLOSED"
+      msg.send "sorry, polls are closed"
 
     msg.send response
 
